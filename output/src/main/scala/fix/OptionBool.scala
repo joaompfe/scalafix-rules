@@ -49,4 +49,11 @@ object OptionBool {
     }
   }
 
+  {
+    None.forall(identity)
+    None.exists { x =>
+      x
+    }
+  }
+
 }

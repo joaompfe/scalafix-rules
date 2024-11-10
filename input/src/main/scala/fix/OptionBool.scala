@@ -52,4 +52,11 @@ object OptionBool {
     }
   }
 
+  {
+    None.fold(ifEmpty = true)(identity)
+    None.fold(ifEmpty = false) { x =>
+      x
+    }
+  }
+
 }
