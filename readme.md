@@ -33,5 +33,6 @@ val x: Option[Boolean] = ???
 
 ## Backlog
 
+- name boolean arguments, except in standard functions such as Option#getOrElse
 - name arguments in applications with more than X arguments
 - sort before fold where the associativity of the operator isn't obvious
