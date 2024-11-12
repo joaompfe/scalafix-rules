@@ -30,3 +30,8 @@ val x: Option[Boolean] = ???
 - x.fold(false)(f)
 + x.exists(f)
 ```
+
+## Backlog
+
+- name arguments in applications with more than X arguments
+- sort before fold where the associativity of the operator isn't obvious
