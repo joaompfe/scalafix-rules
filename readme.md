@@ -37,4 +37,4 @@ val x: Option[Boolean] = ???
 - name boolean arguments, except in standard functions such as Option#getOrElse
 - name arguments in applications with more than X arguments (and sort them alphabetically optionally)
 - rewrite trivial cases of UnsafeIterableOps such as `if (xs.empty) None else Some(xs.minBy(f))`
-- sort before fold where the associativity of the operator isn't obvious
+- suspicious sort before fold where the associativity of the operator isn't obvious
