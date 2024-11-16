@@ -17,4 +17,20 @@ object UnsafeIterableOps {
   ^^^^^^^^^^^^^
     .minBy is unsafe, consider .minByOption */
 
+  List(1).min /* assert: UnsafeIterableOps
+  ^^^^^^^^^^^
+    .min is unsafe, consider .minOption */
+
+  List(1).init /* assert: UnsafeIterableOps
+  ^^^^^^^^^^^^
+    .init is unsafe, consider .dropRight(1) */
+
+  List(1).last /* assert: UnsafeIterableOps
+  ^^^^^^^^^^^^
+    .last is unsafe, consider .lastOption */
+
+  val x = List(1)
+  x.last /* assert: UnsafeIterableOps
+  ^^^^^^^^^^^^
+    .last is unsafe, consider .lastOption */
 }
