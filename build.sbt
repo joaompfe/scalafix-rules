@@ -1,7 +1,6 @@
 lazy val V = _root_.scalafix.sbt.BuildInfo
 
 lazy val rulesCrossVersions = Seq(V.scala213)
-lazy val scala3Version = "3.5.0"
 
 inThisBuild(
   List(
@@ -29,7 +28,10 @@ lazy val `scalafix-rules` = (project in file("."))
 lazy val rules = projectMatrix
   .settings(
     moduleName := "scalafix",
-    libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion
+    libraryDependencies ++= Seq(
+      "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion,
+      "org.typelevel" %% "cats-core" % "2.12.0"
+    )
   )
   .defaultAxes(VirtualAxis.jvm)
   .jvmPlatform(rulesCrossVersions)
@@ -39,14 +41,14 @@ lazy val input = projectMatrix
     publish / skip := true
   )
   .defaultAxes(VirtualAxis.jvm)
-  .jvmPlatform(scalaVersions = rulesCrossVersions :+ scala3Version)
+  .jvmPlatform(scalaVersions = rulesCrossVersions)
 
 lazy val output = projectMatrix
   .settings(
     publish / skip := true
   )
   .defaultAxes(VirtualAxis.jvm)
-  .jvmPlatform(scalaVersions = rulesCrossVersions :+ scala3Version)
+  .jvmPlatform(scalaVersions = rulesCrossVersions)
 
 lazy val testsAggregate = Project("tests", file("target/testsAggregate"))
   .aggregate(tests.projectRefs: _*)

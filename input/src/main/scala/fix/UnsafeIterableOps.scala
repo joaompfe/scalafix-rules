@@ -31,6 +31,6 @@ object UnsafeIterableOps {
 
   val x = List(1)
   x.last /* assert: UnsafeIterableOps
-  ^^^^^^^^^^^^
+  ^^^^^^
     .last is unsafe, consider .lastOption */
 }

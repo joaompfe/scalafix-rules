@@ -1,5 +1,7 @@
 package fix
 
+import fix.util._
+
 import scalafix.v1._
 import scala.meta._
 
@@ -20,8 +22,10 @@ class UnsafeIterableOps extends SemanticRule("UnsafeIterableOps") {
         case t @ DotMin(_, _) => Patch.lint(MinDiagnostic(t))
         // list.minBy
         case t @ DotMinBy(_, _) => Patch.lint(MinByDiagnostic(t))
-        case t @ Term.Select(receiver, term: Term.Name) =>
-          println(s"term: ${term.symbol}")
+        case t @ Term.Select(receiver, method: Term.Name) =>
+          println(s"term: $t")
+          println(s"term.structure: ${t.structure}")
+          println(s"term.symbol: ${t.symbol}")
           Patch.empty
       }
   }.asPatch
@@ -92,8 +96,6 @@ trait SelectMatching {
 
   protected val symbol: Symbol
   private lazy val termName: String = symbol.displayName
-  private lazy val symbolMatcher: SymbolMatcher =
-    SymbolMatcher.exact(symbol.value)
 
   def unapply(
       term: Term
@@ -101,8 +103,8 @@ trait SelectMatching {
     term match {
       case select @ Term.Select(
             receiver,
-            term @ Term.Name(`termName`)
-          ) if symbolMatcher.matches(term) =>
+            Term.Name(`termName`)
+          ) if getOverridenSymbols(select).contains(symbol) =>
         Some((select, receiver))
       case _ => None
     }
