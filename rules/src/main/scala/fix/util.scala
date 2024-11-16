@@ -1,9 +1,18 @@
 package fix
 
+import cats.syntax.all._
+import cats.data.NonEmptySet
 import scalafix.v1._
+
+import scala.collection.immutable.SortedSet
 import scala.meta._
 
 private[fix] object util {
+
+  private object SymbolAlphabetically extends Ordering[Symbol] {
+    override def compare(x: Symbol, y: Symbol): Int =
+      x.value.compare(y.value)
+  }
 
   private def getParentSymbols(
       symbol: Symbol
@@ -51,9 +60,12 @@ private[fix] object util {
 
   def getOverridenSymbols(
       term: Term.Select
-  )(implicit doc: SemanticDocument): Set[Symbol] = term match {
+  )(implicit doc: SemanticDocument): NonEmptySet[Symbol] = term match {
     case Term.Select(_, method) =>
-      getOverridenSymbolsAux(method.symbol)
+      SortedSet
+        .from(getOverridenSymbolsAux(method.symbol))(SymbolAlphabetically)
+        .toNes
+        .get
   }
 
   def getUpperOverridenSymbol(
