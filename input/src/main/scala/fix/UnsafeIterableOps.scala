@@ -33,4 +33,9 @@ object UnsafeIterableOps {
   x.last /* assert: UnsafeIterableOps
   ^^^^^^
     .last is unsafe, consider .lastOption */
+
+  List(1).filter(_ => true)
+    .minBy(identity) /* assert: UnsafeIterableOps
+    ^^^^^^^^^^^^^^^^
+    .minBy is unsafe, consider .minByOption */
 }
