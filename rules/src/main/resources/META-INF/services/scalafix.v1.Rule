@@ -1,3 +1,3 @@
 fix.ScalafixRules
 fix.OptionBool
-fix.UnsafeIterableOps
+fix.UnsafeIterableOpsLint

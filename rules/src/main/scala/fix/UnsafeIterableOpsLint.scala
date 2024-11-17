@@ -5,7 +5,7 @@ import fix.util._
 import scalafix.v1._
 import scala.meta._
 
-class UnsafeIterableOps extends SemanticRule("UnsafeIterableOps") {
+class UnsafeIterableOpsLint extends SemanticRule("UnsafeIterableOpsLint") {
 
   override def fix(implicit doc: SemanticDocument): Patch = {
     doc.tree
