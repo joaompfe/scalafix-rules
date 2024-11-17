@@ -37,4 +37,3 @@ val x: Option[Boolean] = ???
 - name arguments in applications with more than X arguments (and sort them alphabetically optionally)
 - rewrite trivial cases of UnsafeIterableOps such as `if (xs.empty) None else Some(xs.minBy(f))`, `if (xs.size == 1) None else Some(xs.min)`
 - suspicious sort before fold where the associativity of the operator isn't obvious
-- fix position bug of UnsafeIterableOps in multine line expressions
