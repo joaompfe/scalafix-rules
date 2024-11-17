@@ -11,21 +11,21 @@ class UnsafeIterableOps extends SemanticRule("UnsafeIterableOps") {
     doc.tree
       .collect {
         // list.head
-        case t @ DotHead(_, _) => Patch.lint(HeadDiagnostic(t))
+        case DotHead(op) => Patch.lint(HeadDiagnostic(op))
         // list.tail
-        case t @ DotTail(_, _) => Patch.lint(TailDiagnostic(t))
+        case DotTail(op) => Patch.lint(TailDiagnostic(op))
         // list.init
-        case t @ DotInit(_, _) => Patch.lint(InitDiagnostic(t))
+        case DotInit(op) => Patch.lint(InitDiagnostic(op))
         // list.last
-        case t @ DotLast(_, _) => Patch.lint(LastDiagnostic(t))
+        case DotLast(op) => Patch.lint(LastDiagnostic(op))
         // list.min
-        case t @ DotMin(_, _) => Patch.lint(MinDiagnostic(t))
+        case DotMin(op) => Patch.lint(MinDiagnostic(op))
         // list.minBy
-        case t @ DotMinBy(_, _) => Patch.lint(MinByDiagnostic(t))
+        case DotMinBy(op) => Patch.lint(MinByDiagnostic(op))
         case t @ Term.Select(receiver, method: Term.Name) =>
-          println(s"term: $t")
-          println(s"term.structure: ${t.structure}")
-          println(s"term.symbol: ${t.symbol}")
+//          println(s"term: $t")
+//          println(s"term.structure: ${t.structure}")
+//          println(s"term.symbol: ${t.symbol}")
           Patch.empty
       }
   }.asPatch
@@ -99,13 +99,13 @@ trait SelectMatching {
 
   def unapply(
       term: Term
-  )(implicit doc: SemanticDocument): Option[(Term.Select, Term)] =
+  )(implicit doc: SemanticDocument): Option[Term.Name] =
     term match {
       case select @ Term.Select(
-            receiver,
-            Term.Name(`termName`)
+            _,
+            method @ Term.Name(`termName`)
           ) if getOverridenSymbols(select).contains(symbol) =>
-        Some((select, receiver))
+        Some(method)
       case _ => None
     }
 
