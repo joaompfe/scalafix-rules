@@ -3,7 +3,6 @@ package fix
 import metaconfig.{ConfDecoder, Configured}
 import metaconfig.generic.Surface
 import scalafix.v1._
-
 import scala.meta._
 
 case class NamedArgumentsConfig(arity: Int = 5)
@@ -37,10 +36,18 @@ class NamedArguments(config: NamedArgumentsConfig)
                 info.signature match {
                   case method: MethodSignature
                       if method.parameterLists.nonEmpty && info.isScala =>
+                    fun match {
+                      case Term.Select(_, Term.Name(name))
+                          if name == "enhanceStructuredProduct" =>
+                        println(s"arg: ${t.structure}")
+                      case _ => ()
+                    }
                     val params = method.parameterLists(curries(fun))
                     if (params.size >= config.arity) {
+                      println(s"GOING TO CHANGE")
                       val name = params(i).displayName
-                      Patch.addLeft(t, s"$name = ").atomic
+//                      Patch.addLeft(t, s"$name = ").atomic
+                      Patch.empty
                     } else {
                       Patch.empty
                     }

@@ -29,7 +29,7 @@ lazy val rules = projectMatrix
   .settings(
     moduleName := "scalafix",
     libraryDependencies ++= Seq(
-      "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion,
+      "ch.epfl.scala" %% "scalafix-core" % "0.13.0",
       "org.typelevel" %% "cats-core" % "2.12.0"
     )
   )

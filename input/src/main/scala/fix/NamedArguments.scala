@@ -2,6 +2,7 @@
 rule = NamedArguments
  */
 package fix
+// scalafmt:off
 
 object NamedArguments {
 
@@ -32,5 +33,12 @@ object NamedArguments {
   val x = Seq(1, 2, 3, 4, 5)
 
   x.map(f5(_, 2, 3, 4, 5))
+  x.map(f5(1, 2, _, 4, 5))
+  x.map(f5(
+    1,
+    2,
+    _,
+    4,
+    5))
 
 }

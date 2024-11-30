@@ -1,4 +1,5 @@
 package fix
+// scalafmt:off
 
 object NamedArguments {
 
@@ -29,5 +30,12 @@ object NamedArguments {
   val x = Seq(1, 2, 3, 4, 5)
 
   x.map(f5(_, x2 = 2, x3 = 3, x4 = 4, x5 = 5))
+  x.map(f5(x1 = 1, x2 = 2, _, x4 = 4, x5 = 5))
+  x.map(f5(
+    x1 = 1,
+    x2 = 2,
+    _,
+    x4 = 4,
+    x5 = 5))
 
 }
