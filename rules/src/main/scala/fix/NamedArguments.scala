@@ -44,10 +44,10 @@ class NamedArguments(config: NamedArgumentsConfig)
                     }
                     val params = method.parameterLists(curries(fun))
                     if (params.size >= config.arity) {
-                      println(s"GOING TO CHANGE")
+//                      println(s"GOING TO CHANGE")
                       val name = params(i).displayName
-//                      Patch.addLeft(t, s"$name = ").atomic
-                      Patch.empty
+                      Patch.addLeft(t, s"$name = ").atomic
+//                      Patch.empty
                     } else {
                       Patch.empty
                     }
