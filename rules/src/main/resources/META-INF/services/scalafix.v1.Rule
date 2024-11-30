@@ -2,3 +2,4 @@ fix.ScalafixRules
 fix.OptionBool
 fix.UnsafeIterableOpsLint
 fix.UnsafeIterableOpsRewrite
+fix.NamedArguments
