@@ -3,3 +3,4 @@ fix.OptionBool
 fix.UnsafeIterableOpsLint
 fix.UnsafeIterableOpsRewrite
 fix.NamedArguments
+fix.NoDefaultCase
