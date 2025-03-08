@@ -29,12 +29,12 @@ lazy val rules = projectMatrix
   .settings(
     moduleName := "scalafix",
     libraryDependencies ++= Seq(
-      "ch.epfl.scala" %% "scalafix-core" % "0.13.0",
-      "org.typelevel" %% "cats-core" % "2.12.0"
+      "ch.epfl.scala" %% "scalafix-core" % "0.14.2",
+      "org.typelevel" %% "cats-core" % "2.13.0"
     )
   )
   .defaultAxes(VirtualAxis.jvm)
-  .jvmPlatform(rulesCrossVersions)
+  .jvmPlatform(scalaVersions = rulesCrossVersions)
 
 lazy val input = projectMatrix
   .settings(
